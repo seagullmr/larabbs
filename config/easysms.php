@@ -10,8 +10,9 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
-//            'yunpian',
-            'qcloud'
+            'yunpian',
+            'qcloud',
+            'jiguang'
         ],
     ],
     // 可用的网关配置
@@ -19,12 +20,12 @@ return [
         'errorlog' => [
             'file' => '/tmp/easy-sms.log',
         ],
-//        'yunpian' => [
-//            'api_key' => env('YUNPIAN_API_KEY'),
-//        ],
-        'qcloud' => [
-            'sdk_app_id' => env('QCLOUD_SMS_APP_ID'),   // 要在.env文件配置好相应的值
-            'app_key' => env('QCLOUD_SMS_APP_KEY'),   // 要在.env文件配置好相应的值
+        'yunpian' => [
+            'api_key' => env('YUNPIAN_API_KEY'),
+        ],
+        'jiguang' => [
+            'app_key' => env('JIGUANG_SMS_APP_KEY'),   // 要在.env文件配置好相应的值
+            'master_secret' => env('JIGUANG_SMS_MASTER_SECRET'),   // 要在.env文件配置好相应的值
         ]
     ],
 ];
