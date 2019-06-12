@@ -30,7 +30,7 @@ $api->version('v2', function($api) {
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array'
+    'middleware' => ['serializer:array', 'bindings']
 ], function($api) {
 
     $api->group([
@@ -49,9 +49,24 @@ $api->version('v1', [
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+            // 话题
+            $api->post('topics', 'TopicsController@store')
+                ->name('api.topics.store');
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
+            $api->delete('topics/{topic}', 'TopicsController@destroy')
+                ->name('api.topics.destroy');
         });
 
         // 游客可以访问的接口
+        $api->get('categories', 'CategoriesController@index')
+            ->name('api.categories.index'); // 分类列表
+        $api->get('topics', 'TopicsController@index')
+            ->name('api.topics.index'); // 话题列表
+        $api->get('users/{user}/topics', 'TopicsController@userIndex')
+            ->name('api.users.topics.index'); // 某个用户发布的话题列表
+        $api->get('topics/{topic}', 'TopicsController@show')
+            ->name('api.topics.show'); // 话题详情
 
         // 短信验证码
         $api->post('verificationCodes', 'VerificationCodesController@store')
