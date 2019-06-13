@@ -30,7 +30,7 @@ $api->version('v2', function($api) {
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array', 'bindings']
+    'middleware' => ['serializer:array', 'bindings', 'change-locale']
 ], function($api) {
 
     $api->group([
@@ -89,6 +89,12 @@ $api->version('v1', [
             ->name('api.topics.replies.index'); // 话题回复列表
         $api->get('users/{user}/replies', 'RepliesController@userIndex')
             ->name('api.users.replies.index'); // 某个用户的回复列表
+        // 资源推荐
+        $api->get('links', 'LinksController@index')
+            ->name('api.links.index');
+        // 活跃用户
+        $api->get('actived/users', 'UsersController@activedIndex')
+            ->name('api.actived.users.index');
 
         // 短信验证码
         $api->post('verificationCodes', 'VerificationCodesController@store')
